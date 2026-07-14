@@ -1,23 +1,46 @@
 name: Build desktop apps
 
-# Builds the Windows and macOS binaries on their native runners, so you never
-# have to build locally again. Two ways to trigger:
-#   * Push a tag like v1.0.1  -> builds both platforms AND publishes the
+# Tests the core conversion pipeline on BOTH Windows and macOS, then (only if
+# those pass) builds the desktop binaries on their native runners. Triggers:
+#   * Push a tag like v1.0.1  -> tests + builds both platforms AND publishes the
 #     installers/portables to a GitHub Release (a plain download link anyone
 #     can use, no GitHub account required).
-#   * "Run workflow" button (Actions tab) -> builds both platforms and leaves
-#     the binaries as downloadable workflow artifacts (requires being signed in
-#     to GitHub to download).
+#   * "Run workflow" button (Actions tab) -> tests + builds both platforms and
+#     leaves the binaries as downloadable workflow artifacts (requires being
+#     signed in to GitHub to download).
+#   * Every push / pull request -> runs the cross-platform tests.
 
 on:
   push:
+    branches: ['**']
     tags: ['v*']
+  pull_request:
   workflow_dispatch:
 
 jobs:
+  test:
+    name: Test pipeline (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      # Real cross-platform proof: runs the conversion pipeline on macOS's
+      # case-sensitive filesystem, asserting images resolve at their exact path.
+      - run: npm run test:pipeline
+
   build:
+    needs: test # only build/publish if the cross-platform tests pass
     permissions:
       contents: write # needed to publish the GitHub Release on tag builds
+    # Binaries are only needed for tag builds and manual runs, not every push.
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:
