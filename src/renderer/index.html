@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+<title>QTI Preview Studio</title>
+<link rel="stylesheet" href="app-ui.css">
+</head>
+<body>
+<header class="app-header">
+  <h1>QTI Preview Studio</h1>
+  <button id="btnOpenStyleEditor" class="btn-secondary">Style Editor</button>
+</header>
+
+<main>
+  <section class="panel">
+    <h2>1. Select QTI Files</h2>
+    <p class="hint">Choose one or more QTI v1.2 or v2.1 archive (.zip) files. Each produces its own output folder.</p>
+    <button id="btnSelectFiles" class="btn-primary">Select QTI Files&hellip;</button>
+    <ul id="fileList" class="file-list"></ul>
+  </section>
+
+  <section class="panel">
+    <h2>2. Choose Output Location</h2>
+    <p class="hint">Output folders (one per input file) will be created inside this directory.</p>
+    <button id="btnSelectOutputDir" class="btn-primary">Choose Output Location&hellip;</button>
+    <p id="outputDirLabel" class="path-label">No location selected.</p>
+  </section>
+
+  <section class="panel">
+    <h2>3. Options</h2>
+    <div class="option-row">
+      <span class="option-label">Item sort order:</span>
+      <label><input type="radio" name="sortMode" value="natural" checked> Natural (item2 before item10)</label>
+      <label><input type="radio" name="sortMode" value="string"> String (strict alphanumeric)</label>
+    </div>
+    <p class="hint">Rendered vs. raw LaTeX display is a toggle built into every generated page itself \u2014 no setting needed here.</p>
+  </section>
+
+  <section class="panel">
+    <h2>4. Process</h2>
+    <button id="btnProcess" class="btn-primary btn-large" disabled>Process Files</button>
+    <ul id="resultsList" class="results-list"></ul>
+  </section>
+</main>
+
+<div id="styleEditorOverlay" class="overlay hidden">
+  <div class="style-editor-modal">
+    <div class="style-editor-header">
+      <h2>Style Editor</h2>
+      <button id="btnCloseStyleEditor" class="btn-close">&times;</button>
+    </div>
+    <p class="hint" id="styleStatusLabel"></p>
+    <textarea id="styleTextarea" spellcheck="false"></textarea>
+    <div class="style-editor-actions">
+      <button id="btnSaveStyle" class="btn-primary">Save</button>
+      <button id="btnResetStyle" class="btn-secondary">Reset to Baseline</button>
+      <button id="btnRevealStyleFile" class="btn-secondary">Reveal File on Disk</button>
+      <button id="btnReloadStyle" class="btn-secondary">Reload from Disk</button>
+    </div>
+  </div>
+</div>
+
+<script src="renderer.js"></script>
+</body>
+</html>

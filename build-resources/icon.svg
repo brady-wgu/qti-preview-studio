@@ -1,0 +1,33 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16406b"/>
+      <stop offset="1" stop-color="#0E2F51"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="196" fill="url(#bg)"/>
+  <!-- card -->
+  <rect x="232" y="176" width="560" height="672" rx="28" fill="#ffffff"/>
+  <!-- folded corner -->
+  <path d="M 700 176 L 792 176 L 792 268 Z" fill="#d9dee5"/>
+  <!-- meta lines -->
+  <rect x="288" y="248" width="300" height="26" rx="6" fill="#c7d0dc"/>
+  <rect x="288" y="292" width="220" height="20" rx="5" fill="#dde3ea"/>
+  <!-- stem lines -->
+  <rect x="288" y="368" width="448" height="24" rx="6" fill="#33475b"/>
+  <rect x="288" y="410" width="380" height="24" rx="6" fill="#33475b"/>
+  <!-- choice rows -->
+  <circle cx="304" cy="506" r="16" fill="none" stroke="#8a97a6" stroke-width="6"/>
+  <rect x="344" y="494" width="320" height="22" rx="6" fill="#8a97a6"/>
+
+  <circle cx="304" cy="566" r="16" fill="#14532d"/>
+  <rect x="344" y="554" width="320" height="22" rx="6" fill="#14532d"/>
+  <path d="M 296 566 l 6 8 l 12 -16" stroke="#ffffff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle cx="304" cy="626" r="16" fill="none" stroke="#8a97a6" stroke-width="6"/>
+  <rect x="344" y="614" width="280" height="22" rx="6" fill="#8a97a6"/>
+
+  <!-- correct badge -->
+  <rect x="600" y="546" width="132" height="40" rx="20" fill="#cdeecd" stroke="#9ecb9e" stroke-width="4"/>
+  <text x="666" y="573" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#14532d" text-anchor="middle">Correct</text>
+</svg>
