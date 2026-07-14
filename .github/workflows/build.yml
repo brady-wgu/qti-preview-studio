@@ -38,7 +38,10 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run ${{ matrix.script }}
+        # --publish never: electron-builder auto-publishes when a tag is present,
+        # which needs a token in this step and duplicates our explicit release
+        # step below. We handle distribution ourselves, so disable self-publish.
+        run: npm run ${{ matrix.script }} -- --publish never
 
       - name: Upload build as workflow artifact
         uses: actions/upload-artifact@v4
