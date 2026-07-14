@@ -1,45 +1,45 @@
 # QTI Preview Studio
 
-Preview a QTI item bank (`.zip`, v1.2 or v2.1) as offline HTML, without importing it into your assessment platform first.
+Preview a QTI item bank (`.zip`, v1.2 or v2.1) as offline web pages, without importing it into your assessment platform first.
 
-Two views of every bank:
+You get two views of every bank:
 
 - **Item Preview:** one item at a time, like taking the test.
 - **Print Preview:** every item on one scrollable page, good for scanning or printing an answer key.
 
-Correct answers are highlighted, math is typeset (with a toggle for raw LaTeX), and images are included. Everything runs offline; no data leaves your machine.
+Correct answers are highlighted, math is displayed properly (with a button to switch to the raw math markup), and images are included. Everything runs on your own computer; nothing is sent anywhere.
 
-## Download
+## Download and install (Windows)
 
-Get the latest build from the [**Releases page**](https://github.com/brady-wgu/qti-preview-studio/releases/latest).
+1. Open the [**Releases page**](https://github.com/brady-wgu/qti-preview-studio/releases/latest).
+2. Under **Assets**, click one of these to download it (the version number, such as `1.0.1`, is part of the file name):
+   - The `.exe` **without** "Setup" in its name: the **portable** version. Nothing to install, just double-click it to run. **This is the easiest option.**
+   - The `.exe` **with** "Setup" in its name: the **installer**. Installs the app and adds a Start-menu shortcut, like a normal program.
+3. On a Mac, download the `.dmg` file instead, then drag the app to Applications.
 
-| File | What it is |
-|------|-----------|
-| `QTI Preview Studio <version>.exe` | Windows portable. Double-click to run, no install. **Easiest.** |
-| `QTI Preview Studio Setup <version>.exe` | Windows installer, adds a Start-menu shortcut. |
-| `QTI Preview Studio-<version>-arm64.dmg` | macOS (Apple Silicon). |
+> **A warning on first launch is normal and safe to allow.** Because this app isn't signed with a paid certificate, Windows shows a blue "Windows protected your PC" screen the first time. Click **More info**, then **Run anyway**. You only do this once per computer.
 
-> **First launch:** the app is unsigned, so Windows shows "Windows protected your PC." Click **More info**, then **Run anyway**. Once per machine.
+## How to use it
 
-## Use it
+1. Click **Select QTI Files…** and choose one or more `.zip` archives. Each one becomes its own output folder.
+2. Click **Choose Output Location…** and pick the folder where the results should go.
+3. Under **Options**, pick how items are sorted: **Natural** (so `item2` comes before `item10`) or **String** (strict character-by-character).
+4. Click **Process Files**. When it finishes, each bank shows four buttons:
 
-1. **Select QTI Files:** one or more `.zip` archives (each gets its own output folder).
-2. **Choose Output Location:** where the output folders are created.
-3. **Options:** sort items by **Natural** order (`item2` before `item10`) or strict **String** order.
-4. **Process Files.** Each archive then shows four buttons:
+| Button | What it does |
+|--------|--------------|
+| **Item Preview** | Opens the one-item-at-a-time view in your web browser. |
+| **Print Preview** | Opens the all-items-on-one-page view in your web browser. |
+| **Log** | Opens a plain-text summary of what was converted. |
+| **Reveal Folder** | Opens the results folder on your computer. |
 
-| Button | Action |
-|--------|--------|
-| Item Preview | Opens the one-item slideshow in your browser. |
-| Print Preview | Opens all items stacked in your browser. |
-| Log | Opens `Log.txt`, a summary of what converted. |
-| Reveal Folder | Opens the output folder. |
+In either preview, correct answers have a green **✓ Correct** badge (fill-in and dropdown answers show in an Answer Key box), and the button in the top-right corner switches between properly displayed math and the raw math markup.
 
-Correct answers carry a green **✓ Correct** badge; fill-in and dropdown answers appear in an Answer Key box. The top-right button toggles typeset math and raw LaTeX. Full walkthrough: [`docs/QUICKSTART.md`](docs/QUICKSTART.md).
+Need more detail? See the [full guide](docs/QUICKSTART.md).
 
-## Build from source
+## For developers (optional)
 
-Requires [Node.js](https://nodejs.org) 18 or newer.
+Most people can ignore this section and just download the app above. To rebuild it from source you need [Node.js](https://nodejs.org) 18 or newer:
 
 ```sh
 npm install          # one time
@@ -47,14 +47,12 @@ npm run dist:win     # Windows installer + portable
 npm run dist:mac     # macOS build (run on a Mac)
 ```
 
-Output lands in `release/`. Step-by-step guide: [`docs/BUILDING_THE_APP.md`](docs/BUILDING_THE_APP.md).
+The finished files land in the `release/` folder. Full instructions are in [`docs/BUILDING_THE_APP.md`](docs/BUILDING_THE_APP.md), and maintainer notes are in [`docs/DEVELOPER.md`](docs/DEVELOPER.md) and [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
-Prefer not to build locally? Push a version tag (`git tag v1.0.2 && git push origin v1.0.2`) and CI builds both platforms and publishes a Release. Every push also runs the cross-platform pipeline tests first.
+You can also let GitHub build both versions for you: push a version tag (for example `git tag v1.0.2 && git push origin v1.0.2`) and the automated build publishes a new release. Cross-platform tests run first on every change.
 
-## Notes
+## Good to know
 
-- Supported item types: multiple choice, multiple response, fill-in-the-blank, dropdown. Others appear with their metadata and a "not supported yet" note (see `Log.txt`).
-- Re-processing an archive overwrites its previous output folder.
-- The app is unsigned (see the first-launch note above).
-
-Maintainer docs: [`docs/DEVELOPER.md`](docs/DEVELOPER.md) and [`docs/HANDOFF.md`](docs/HANDOFF.md).
+- Supported item types: multiple choice, multiple response, fill-in-the-blank, and dropdown. Any other type still shows its basic details plus a "not supported yet" note (check the Log).
+- Running the same bank again replaces its previous results folder.
+- The app works entirely offline and never sends your data anywhere.
