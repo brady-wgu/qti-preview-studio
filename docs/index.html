@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QTI Preview Studio</title>
+<meta name="description" content="Preview a QTI item bank as offline web pages, without importing it into your assessment platform first.">
+<meta property="og:title" content="QTI Preview Studio">
+<meta property="og:description" content="Preview a QTI item bank as offline web pages, without importing it into your assessment platform first.">
+<meta property="og:image" content="assets/app-ui.png">
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="https://brady-wgu.github.io/brady-design-system/fonts/aptos.css">
+<style>
+  :root {
+    --navy: #002855;
+    --blue: #0070F0;
+    --ink: #0A0A0A;
+    --bg: #F7F4EF;
+    --card-bg: #FFFFFF;
+    --border: #E4E0D8;
+    --muted: #5B5A56;
+    --green: #1A6635;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --navy: #4FA0FF;
+      --blue: #5CA8FF;
+      --ink: #F2F2F0;
+      --bg: #10151C;
+      --card-bg: #1A2130;
+      --border: #2A3242;
+      --muted: #A8AEB8;
+      --green: #4CC382;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Aptos', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 {
+    font-family: 'Aptos Display', 'Aptos', system-ui, sans-serif;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  a { color: var(--blue); }
+  code { background: var(--border); padding: 0.1em 0.4em; border-radius: 4px; font-size: 0.92em; }
+
+  /* Hero */
+  .hero { padding: 64px 0 40px; text-align: center; }
+  .hero img.icon { width: 72px; height: 72px; border-radius: 16px; margin-bottom: 16px; }
+  .hero h1 { font-size: 40px; margin: 0 0 12px; }
+  .hero p.tagline { font-size: 18px; color: var(--muted); max-width: 620px; margin: 0 auto 32px; }
+
+  /* Download buttons */
+  .downloads { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 12px; }
+  .dl-btn {
+    display: flex; flex-direction: column; align-items: flex-start;
+    min-width: 220px;
+    background: var(--navy); color: #fff; text-decoration: none;
+    padding: 14px 20px; border-radius: 10px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .dl-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+  .dl-btn .dl-title { font-weight: 600; font-size: 15px; }
+  .dl-btn .dl-file { font-size: 12px; opacity: 0.75; margin-top: 2px; font-family: 'Aptos Mono', monospace; }
+  .dl-btn.secondary { background: transparent; border: 1.5px solid var(--navy); color: var(--navy); }
+  @media (prefers-color-scheme: dark) {
+    .dl-btn.secondary { border-color: var(--muted); color: var(--ink); }
+  }
+  .repo-link { text-align: center; font-size: 14px; margin-bottom: 8px; }
+  .version-note { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 48px; }
+
+  .pick-note {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 20px; max-width: 640px; margin: 0 auto 56px; font-size: 14.5px;
+  }
+  .pick-note strong { color: var(--navy); }
+
+  section { margin-bottom: 56px; }
+  section h2 { font-size: 24px; border-bottom: 2px solid var(--border); padding-bottom: 10px; margin-bottom: 24px; }
+
+  /* Screenshots */
+  .shots { display: flex; flex-direction: column; gap: 28px; }
+  .shot-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .shot-card img { width: 100%; display: block; border-bottom: 1px solid var(--border); }
+  .shot-card figcaption { padding: 12px 18px; font-size: 14px; color: var(--muted); }
+
+  /* Steps */
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 4px 0 4px 44px;
+    margin-bottom: 14px;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 2px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.03em; }
+
+  .badge-ok { display: inline-block; background: var(--green); color: #fff; border-radius: 6px; padding: 1px 8px; font-size: 12.5px; font-weight: 600; }
+
+  ul.notes { padding-left: 20px; }
+  ul.notes li { margin-bottom: 8px; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 0 48px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <img class="icon" src="assets/favicon.png" alt="">
+    <h1>QTI Preview Studio</h1>
+    <p class="tagline">Preview a QTI item bank as offline web pages, without importing it into your assessment platform first.</p>
+
+    <div class="downloads">
+      <a id="dl-portable" class="dl-btn" href="https://github.com/brady-wgu/qti-preview-studio/releases/latest">
+        <span class="dl-title">Download for Windows</span>
+        <span class="dl-file">Portable, no install</span>
+      </a>
+      <a id="dl-installer" class="dl-btn secondary" href="https://github.com/brady-wgu/qti-preview-studio/releases/latest">
+        <span class="dl-title">Windows Installer</span>
+        <span class="dl-file">Adds a Start-menu shortcut</span>
+      </a>
+      <a id="dl-mac" class="dl-btn secondary" href="https://github.com/brady-wgu/qti-preview-studio/releases/latest">
+        <span class="dl-title">Download for Mac</span>
+        <span class="dl-file">Apple Silicon</span>
+      </a>
+    </div>
+    <p class="version-note">Latest release: <span id="version-label">see Releases page</span></p>
+    <p class="repo-link"><a href="https://github.com/brady-wgu/qti-preview-studio">View source on GitHub</a></p>
+  </div>
+
+  <div class="pick-note">
+    <strong>Which one should I pick?</strong> Use the <strong>portable</strong> version to try it out or run it occasionally: it is just one file, nothing gets installed, and you delete it when you are done. Pick the <strong>installer</strong> if you want the app to stay on the computer with a Start-menu shortcut, like a normal program. Both work exactly the same once open.
+    <br><br>
+    <strong>A warning on first launch is normal and safe to allow.</strong> Because this app isn't signed with a paid certificate, Windows shows a blue "Windows protected your PC" screen the first time. Click <strong>More info</strong>, then <strong>Run anyway</strong>. You only do this once per computer.
+  </div>
+
+  <section>
+    <h2>What you get</h2>
+    <div class="shots">
+      <figure class="shot-card">
+        <img src="assets/app-ui.png" alt="QTI Preview Studio app window">
+        <figcaption>The app itself: pick your files, pick where the results go, click Process.</figcaption>
+      </figure>
+      <figure class="shot-card">
+        <img src="assets/item-preview.png" alt="Item Preview showing one question with a correct-answer badge">
+        <figcaption><strong>Item Preview</strong>: one item at a time, like taking the test. Correct answers carry a green &check; Correct badge.</figcaption>
+      </figure>
+      <figure class="shot-card">
+        <img src="assets/print-preview.png" alt="Print Preview showing several items stacked on one page">
+        <figcaption><strong>Print Preview</strong>: every item on one scrollable page, good for scanning or printing an answer key.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>How to use it</h2>
+    <ol class="steps">
+      <li>Click <strong>Select QTI Files&hellip;</strong> and choose one or more <code>.zip</code> archives. Each one becomes its own output folder.</li>
+      <li>Click <strong>Choose Output Location&hellip;</strong> and pick the folder where the results should go.</li>
+      <li>Under <strong>Options</strong>, pick how items are sorted: <strong>Natural</strong> (so <code>item2</code> comes before <code>item10</code>) or <strong>String</strong> (strict character-by-character).</li>
+      <li>Click <strong>Process Files</strong>. When it finishes, each bank shows four buttons.</li>
+    </ol>
+
+    <table>
+      <thead><tr><th>Button</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Item Preview</strong></td><td>Opens the one-item-at-a-time view in your web browser.</td></tr>
+        <tr><td><strong>Print Preview</strong></td><td>Opens the all-items-on-one-page view in your web browser.</td></tr>
+        <tr><td><strong>Log</strong></td><td>Opens a plain-text summary of what was converted.</td></tr>
+        <tr><td><strong>Reveal Folder</strong></td><td>Opens the results folder on your computer.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size: 14.5px; color: var(--muted); margin-top: 16px;">In either preview, the button in the top-right corner switches between properly displayed math and the raw math markup. Need more detail? See the <a href="https://github.com/brady-wgu/qti-preview-studio/blob/master/docs/QUICKSTART.md">full guide</a>.</p>
+  </section>
+
+  <section>
+    <h2>Good to know</h2>
+    <ul class="notes">
+      <li>Supported item types: multiple choice, multiple response, fill-in-the-blank, and dropdown. Any other type still shows its basic details plus a "not supported yet" note (check the Log).</li>
+      <li>Running the same bank again replaces its previous results folder.</li>
+      <li>The app works entirely offline and never sends your data anywhere. <span class="badge-ok">Verified</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>
+      <a href="https://github.com/brady-wgu/qti-preview-studio">Source code</a> &middot;
+      <a href="https://github.com/brady-wgu/qti-preview-studio/releases/latest">All releases</a> &middot;
+      <a href="https://github.com/brady-wgu/qti-preview-studio/blob/master/docs/DEVELOPER.md">Developer docs</a>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  async function loadLatestRelease() {
+    try {
+      const res = await fetch('https://api.github.com/repos/brady-wgu/qti-preview-studio/releases/latest');
+      if (!res.ok) return;
+      const data = await res.json();
+      const assets = data.assets || [];
+      const portable = assets.find(a => /\.exe$/i.test(a.name) && !/setup/i.test(a.name));
+      const installer = assets.find(a => /setup/i.test(a.name) && /\.exe$/i.test(a.name));
+      const dmg = assets.find(a => /\.dmg$/i.test(a.name));
+
+      const versionLabel = document.getElementById('version-label');
+      if (versionLabel && data.tag_name) versionLabel.textContent = data.tag_name;
+
+      setButton('dl-portable', portable);
+      setButton('dl-installer', installer);
+      setButton('dl-mac', dmg);
+    } catch (e) {
+      // Leave the fallback links (pointing to the Releases page) in place.
+    }
+  }
+  function setButton(id, asset) {
+    if (!asset) return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.href = asset.browser_download_url;
+    const sub = el.querySelector('.dl-file');
+    if (sub) sub.textContent = asset.name;
+  }
+  document.addEventListener('DOMContentLoaded', loadLatestRelease);
+</script>
+
+</body>
+</html>
