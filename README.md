@@ -1,5 +1,7 @@
 # QTI Preview Studio
 
+**[Visit the project site &rarr;](https://brady-wgu.github.io/qti-preview-studio/)** for downloads, screenshots, and plain-language instructions. This page (README) is the technical companion for developers.
+
 Preview a QTI item bank (`.zip`, v1.2 or v2.1) as offline web pages, without importing it into your assessment platform first.
 
 You get two views of every bank:
