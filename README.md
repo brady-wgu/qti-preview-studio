@@ -21,7 +21,9 @@ Correct answers are highlighted, math is displayed properly (with a button to sw
 
 **Which one should I pick?** Use the **portable** version to try it out or run it occasionally: it is just one file, nothing gets installed, and you delete it when you are done. Pick the **installer** if you want the app to stay on the computer with a Start-menu shortcut, like a normal program. Both work exactly the same once open.
 
-> **A warning on first launch is normal and safe to allow.** Because this app isn't signed with a paid certificate, Windows shows a blue "Windows protected your PC" screen the first time. Click **More info**, then **Run anyway**. You only do this once per computer.
+> **A warning on first launch is normal and safe to allow (Windows).** Because this app isn't signed with a paid certificate, Windows shows a blue "Windows protected your PC" screen the first time. Click **More info**, then **Run anyway**. You only do this once per computer.
+
+> **A warning on first launch is normal and safe to allow (Mac).** Double-click the app in Applications. If macOS blocks it, go to **System Settings → Privacy & Security**, scroll down, and click **Open Anyway** next to the message about this app, then confirm **Open** in the dialog. You only do this once per computer. If you see a message that the app **"is damaged and can't be opened,"** you have an older version; download the latest release instead.
 
 ## How to use it
 
