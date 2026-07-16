@@ -1,7 +1,7 @@
 {
   "name": "qti-preview-studio",
   "productName": "QTI Preview Studio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Offline QTI (v1.2 / v2.1) item bank previewer -- generates ITEM_PREVIEW and PRINT_PREVIEW HTML from QTI archives.",
   "main": "src/main/main.js",
   "author": "Your Organization",
@@ -42,6 +42,7 @@
       "target": ["dmg", "zip"],
       "icon": "build-resources/icon.png"
     },
+    "afterSign": "build-resources/afterSign-adhoc.js",
     "win": {
       "target": ["nsis", "portable"],
       "icon": "build-resources/icon.png"

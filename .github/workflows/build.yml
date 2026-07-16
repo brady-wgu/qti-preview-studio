@@ -66,6 +66,16 @@ jobs:
         # step below. We handle distribution ourselves, so disable self-publish.
         run: npm run ${{ matrix.script }} -- --publish never
 
+      - name: Verify macOS app is signed (would otherwise "damaged" on Apple Silicon)
+        if: matrix.os == 'macos-latest'
+        shell: bash
+        run: |
+          set -e
+          app=$(find release -maxdepth 2 -name '*.app' -print -quit)
+          echo "Checking: $app"
+          codesign --verify --deep --strict "$app"
+          codesign -dv "$app" 2>&1 | grep -q '^Signature=' && echo "Signed OK"
+
       - name: Upload build as workflow artifact
         uses: actions/upload-artifact@v4
         with:
