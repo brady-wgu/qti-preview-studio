@@ -34,6 +34,9 @@ jobs:
       # Real cross-platform proof: runs the conversion pipeline on macOS's
       # case-sensitive filesystem, asserting images resolve at their exact path.
       - run: npm run test:pipeline
+      # Deep feature-matrix coverage: every item type, edge case, and
+      # negative path, on both platforms.
+      - run: npm run test:matrix
 
   build:
     needs: test # only build/publish if the cross-platform tests pass
