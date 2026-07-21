@@ -12,14 +12,13 @@
     "test:core": "node test/run-against-exemplars.js",
     "test:ui": "node test/smoke-test-renderer.js",
     "test:pipeline": "node test/pipeline-crossplatform.test.js",
+    "test:matrix": "node test/feature-matrix.test.js",
     "dist:mac": "electron-builder --mac",
     "dist:win": "electron-builder --win",
     "dist:all": "electron-builder --mac --win"
   },
-  "dependencies": {
-    "adm-zip": "^0.5.16"
-  },
   "devDependencies": {
+    "adm-zip": "^0.5.16",
     "electron": "^31.0.0",
     "electron-builder": "^24.13.3"
   },
