@@ -1,5 +1,39 @@
 # QTI Preview Studio
 
+
+## Start here (for the new owner)
+
+### What it is
+- QTI Preview Studio is a free desktop app (Windows and Mac) and a public web page. It turns a QTI assessment item bank (.zip, version 1.2 or 2.1) into web pages you can read offline, with math shown properly and correct answers marked.
+- Nothing is uploaded anywhere; everything runs on the user's own computer.
+
+### Who needs it and whether anyone must act now
+- Anyone who reviews assessment item banks before they go into an assessment platform.
+- Action needed now (one item): the public site is linked from another team's project doc. After the transfer the site address changes from brady-wgu.github.io/qti-preview-studio to mikeh1239.github.io/qti-preview-studio. GitHub does not redirect old site addresses, so the old link will stop working.
+- Tell that doc's owner to replace the link with the new address.
+
+### What it needs to run
+- To use it: a Windows or Mac computer and a QTI .zip file. Nothing else to install (the portable version is a single file).
+- To change it: a developer with Node.js 18 or newer. Not needed for normal use.
+
+### How to start
+1. Open the Releases page of the repo on GitHub and download the .exe without "Setup" in its name. Expected result: one file lands in Downloads.
+2. Double-click it. Windows shows a blue "Windows protected your PC" screen the first time. Click More info, then Run anyway. Expected result: the app window opens.
+3. Click Select QTI Files, pick a QTI .zip, click Choose Output Location, pick a folder, then click Process Files. Expected result: the bank appears with four buttons.
+4. Click Item Preview. Expected result: your web browser opens one question at a time, correct answers show a green Correct badge.
+5. Open the new site address in a browser. Expected result: the project page loads with downloads and screenshots.
+
+### What changes now that Brady has left
+- Mike owns the repo and the public site. There is no active maintainer, so the app is "works as is".
+- New app versions are built by GitHub automatically when a developer pushes a version tag. Without a developer, keep using the current release.
+- The warning on first launch stays because the app is not signed with a paid certificate.
+
+### Where to find more
+- README.md in the repo root (plain download and use instructions).
+- docs/QUICKSTART.md (full walkthrough), docs/HANDOFF.md (validation notes), docs/DEVELOPER.md and docs/BUILDING_THE_APP.md (for developers).
+
+---
+
 **[Visit the project site &rarr;](https://brady-wgu.github.io/qti-preview-studio/)** for downloads, screenshots, and plain-language instructions. This page (README) is the technical companion for developers.
 
 Preview a QTI item bank (`.zip`, v1.2 or v2.1) as offline web pages, without importing it into your assessment platform first.
